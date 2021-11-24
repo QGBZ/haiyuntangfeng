@@ -9,32 +9,32 @@
         </div>
         <div class="preface">
             <div class="preface_block block_1">
-                <div class="font_1_1">十</div>
-                <div class="font_1_2">年</div>
-                <div class="font_1_3">如</div>
-                <div class="font_1_4">一</div>
-                <div class="font_1_5">夢</div>
+                <div class="font_1_1 font_style" :class="{'font_anim':showFontIndex >= 0 }">十</div>
+                <div class="font_1_2 font_style" :class="{'font_anim':showFontIndex >= 1 }">年</div>
+                <div class="font_1_3 font_style" :class="{'font_anim':showFontIndex >= 2 }">如</div>
+                <div class="font_1_4 font_style" :class="{'font_anim':showFontIndex >= 3 }">一</div>
+                <div class="font_1_5 font_style" :class="{'font_anim':showFontIndex >= 4 }">夢</div>
             </div>
             <div class="preface_block block_2">
-                <div class="font_2_1">滄</div>
-                <div class="font_2_2">海</div>
-                <div class="font_2_3">曠</div>
-                <div class="font_2_4">浮</div>
-                <div class="font_2_5">生</div>
+                <div class="font_2_1 font_style" :class="{'font_anim':showFontIndex >= 5 }">滄</div>
+                <div class="font_2_2 font_style" :class="{'font_anim':showFontIndex >= 6 }">海</div>
+                <div class="font_2_3 font_style" :class="{'font_anim':showFontIndex >= 7 }">曠</div>
+                <div class="font_2_4 font_style" :class="{'font_anim':showFontIndex >= 8 }">浮</div>
+                <div class="font_2_5 font_style" :class="{'font_anim':showFontIndex >= 9 }">生</div>
             </div>
             <div class="preface_block block_3">
-                <div class="font_3_1">不</div>
-                <div class="font_3_2">知</div>
-                <div class="font_3_3">海</div>
-                <div class="font_3_4">棠</div>
-                <div class="font_3_5">處</div>
+                <div class="font_3_1 font_style" :class="{'font_anim':showFontIndex >= 10 }">不</div>
+                <div class="font_3_2 font_style" :class="{'font_anim':showFontIndex >= 11 }">知</div>
+                <div class="font_3_3 font_style" :class="{'font_anim':showFontIndex >= 12 }">海</div>
+                <div class="font_3_4 font_style" :class="{'font_anim':showFontIndex >= 13 }">棠</div>
+                <div class="font_3_5 font_style" :class="{'font_anim':showFontIndex >= 14 }">處</div>
             </div>
             <div class="preface_block block_4">
-                <div class="font_4_1">風</div>
-                <div class="font_4_2">雪</div>
-                <div class="font_4_3">二</div>
-                <div class="font_4_4">三</div>
-                <div class="font_4_5">更</div>
+                <div class="font_4_1 font_style" :class="{'font_anim':showFontIndex >= 15 }">風</div>
+                <div class="font_4_2 font_style" :class="{'font_anim':showFontIndex >= 16 }">雪</div>
+                <div class="font_4_3 font_style" :class="{'font_anim':showFontIndex >= 17 }">二</div>
+                <div class="font_4_4 font_style" :class="{'font_anim':showFontIndex >= 18 }">三</div>
+                <div class="font_4_5 font_style" :class="{'font_anim':showFontIndex >= 19 }">更</div>
             </div>
         </div>
 
@@ -48,19 +48,31 @@
         name: 'prologue',
         data() {
             return {
-                isStamp: false
+                isStamp: false,
+                showFontIndex: 0
             }
         },
         methods: {
             stamp() {
-                this.isStamp = true
+                if (this.isStamp) {
+                    console.log('到时间了可以触发了')
+                }
             }
         },
         mounted() {
-            var scene = document.getElementById("scene");
-            var parallaxInstance = new Parallax(scene);
+            const scene = document.getElementById("scene");
+            const parallaxInstance = new Parallax(scene);
         },
         created() {
+
+                setInterval(() => {
+                    if (this.showFontIndex  < 20) {
+                        this.showFontIndex += 1;
+                    } else {
+                        this.isStamp = true
+                    }
+                },300)
+
         }
     }
 </script>
@@ -106,12 +118,6 @@
         color: white;
     }
 
-    .loaded .stamp:after {
-        opacity: .75;
-        transform: rotate(-15deg) scale(1);
-        z-index: -1;
-    }
-
     .preface_block {
         position: relative;
         float: right;
@@ -132,10 +138,25 @@
         left: 10%;
         bottom: 30vh;
         opacity: 0;
+        transition: opacity 2s;
     }
 
     .stamp img {
         width: 100%;
         height: 100%;
+    }
+
+    .font_style{
+        opacity: 0;
+    }
+
+    .font_anim{
+        animation: show 1s;
+        animation-fill-mode: forwards;
+        transition: opacity 1s initial;
+    }
+    @keyframes show {
+        from {opacity: 0}
+        to  {opacity: 1}
     }
 </style>
