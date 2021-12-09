@@ -8,7 +8,7 @@
 #app {
   margin: 0;
   padding: 0;
-  background-color: black;
+  background-color:#fffce4;
   position: absolute;
   width: 100%;
   height: 100%;

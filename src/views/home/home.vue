@@ -1,5 +1,7 @@
 <template>
- <div></div>
+ <div class="home">
+   <div class=""></div>
+ </div>
 </template>
 
 <script>
@@ -9,5 +11,7 @@
 </script>
 
 <style scoped>
-
+    .home{
+        background-color: #fffce4;
+    }
 </style>

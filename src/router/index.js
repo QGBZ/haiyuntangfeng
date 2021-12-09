@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Prologue from '../views/prologue/prologue'
-import Index from '../views/Home.vue'
+import Index from '../views/home/home'
 
 Vue.use(VueRouter)
 
@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/',
     name: 'prologue',
-    component: Prologue
+    component: Index
   },
   {
     path: '/index',
